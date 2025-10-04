@@ -1,3 +1,120 @@
-[gd_scene format=3 uid="uid://dr3rs27k1thwn"]
+[gd_scene load_steps=9 format=3 uid="uid://dr3rs27k1thwn"]
+
+[ext_resource type="Script" uid="uid://ds015jldkradl" path="res://main.gd" id="1_ig7tw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
+size = Vector3(0.6, 0.5, 0.7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
+size = Vector3(0.6, 0.5, 0.7)
+
+[sub_resource type="Gradient" id="Gradient_7dm0k"]
+offsets = PackedFloat32Array(0.10209424, 0.2853403, 0.8376963, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.15127608, 0.15127608, 0.15127608, 1, 0.7107778, 0.5517282, 0.44365835, 1, 0.4862745, 0.34117648, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ig7tw"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0xm2m"]
+noise = SubResource("FastNoiseLite_ig7tw")
+color_ramp = SubResource("Gradient_7dm0k")
+seamless = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_texture = SubResource("NoiseTexture2D_0xm2m")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+
+[sub_resource type="Environment" id="Environment_7dm0k"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.0
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_ig7tw")
+
+[node name="ROV" type="RigidBody3D" parent="."]
+unique_name_in_owner = true
+gravity_scale = 0.0
+linear_damp = 2.0
+angular_damp = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ROV"]
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ROV"]
+mesh = SubResource("BoxMesh_7dm0k")
+
+[node name="Camera3D" type="Camera3D" parent="ROV"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="ROV"]
+transform = Transform3D(0.9659258, 0.04494346, -0.25488698, 0, 0.98480785, 0.17364821, 0.25881907, -0.1677313, 0.9512513, 0.3, 0.1, -0.3)
+shadow_enabled = true
+shadow_bias = 0.2
+spot_range = 7.0
+spot_attenuation = 1.5
+spot_angle_attenuation = 0.6597543
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="ROV"]
+transform = Transform3D(0.9659258, -0.04494346, 0.25488698, 0, 0.98480785, 0.17364821, -0.25881907, -0.1677313, 0.9512513, -0.3, 0.1, -0.3)
+shadow_enabled = true
+shadow_bias = 0.2
+spot_range = 7.0
+spot_attenuation = 1.5
+spot_angle_attenuation = 0.6597543
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_h2yge")
+use_collision = true
+
+[node name="Ground" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.4451904, 0)
+size = Vector3(26.994385, 9.890381, 27.744385)
+
+[node name="Rock1" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.96493864, 0.25441852, -0.06453372, -0.2624755, 0.93531877, -0.23724532, 0, 0.2458657, 0.9693039, -2.1510415, -0.52650523, -3.5719419)
+size = Vector3(5, 1, 10)
+
+[node name="Rock2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.26807705, -0.16550495, -0.9490748, -0.2624755, 0.93531877, -0.2372453, 0.92695266, 0.31270888, 0.20729652, 0.5490713, -0.52650523, -4.305937)
+size = Vector3(5, 1, 10)
+
+[node name="Rock3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.26807705, -0.16550493, -0.9490748, -0.9223227, 0.24049678, -0.3024598, 0.27830803, 0.95643574, -0.08817728, 0.49674767, -1.0223536, -8.055565)
+size = Vector3(5, 5.123535, 10)
+
+[node name="VerticalTunnel1" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.117995046, -0.9901989, 0.074720606, -0.7672291, 0.0431367, -0.6399209, 0.6304258, -0.13283539, -0.76479954, 0.2238995, -0.966414, -4.6434736)
+operation = 2
+size = Vector3(3.6622314, 1.8026123, 11.497559)
+
+[node name="Tunnel1" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.942859, 0)
+operation = 2
+size = Vector3(3, 3, 19)
+
+[node name="Tunnel2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -5.942859, 0)
+operation = 2
+size = Vector3(3, 3, 19)
+
+[node name="Tunnel3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -5.942859, 0)
+operation = 2
+size = Vector3(3, 3, 19)
+
+[node name="Tunnel4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, 2.5028517, -5.942859, 5.473281)
+operation = 2
+size = Vector3(3, 3, 19)
+
+[node name="Tunnel5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, -2.876167, -5.942859, -2.0501785)
+operation = 2
+size = Vector3(3, 3, 19)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7dm0k")
