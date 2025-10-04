@@ -1,7 +1,40 @@
-[gd_scene load_steps=15 format=3 uid="uid://dr3rs27k1thwn"]
+[gd_scene load_steps=20 format=3 uid="uid://dr3rs27k1thwn"]
 
 [ext_resource type="Script" uid="uid://ds015jldkradl" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="AudioStream" uid="uid://c7xygtod3o8cy" path="res://assets/audio/ambiance.mp3" id="2_0xm2m"]
+
+[sub_resource type="Gradient" id="Gradient_0xm2m"]
+colors = PackedColorArray(0.054142177, 0.054142177, 0.05414214, 1, 0.12408299, 0.124082975, 0.124082945, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h2yge"]
+fractal_type = 3
+domain_warp_enabled = true
+domain_warp_amplitude = 90.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1bvp3"]
+noise = SubResource("FastNoiseLite_h2yge")
+color_ramp = SubResource("Gradient_0xm2m")
+seamless = true
+normalize = false
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lquwl"]
+texture = SubResource("NoiseTexture2D_1bvp3")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
+bg_color = Color(0.08468992, 0.08468994, 0.08468988, 1)
+border_width_left = 18
+border_width_top = 16
+border_width_right = 18
+border_width_bottom = 38
+border_color = Color(0.19973177, 0.19973174, 0.19973174, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 4
+shadow_offset = Vector2(0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(0.6, 0.5, 0.7)
@@ -60,22 +93,83 @@ ambient_light_energy = 0.0
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ig7tw")
 
-[node name="ROV" type="RigidBody3D" parent="."]
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_lquwl")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = 38.0
+offset_right = -525.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.333
+alignment_horizontal = 0
+
+[node name="Panel" type="Panel" parent="AspectRatioContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0xm2m")
+
+[node name="Label" type="Label" parent="AspectRatioContainer/Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -36.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.058420584, 0.058420606, 0.058420576, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 24
+text = "OMNI-VIZ TECHNOLOGY"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 40
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="AspectRatioContainer/MarginContainer"]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="AspectRatioContainer/MarginContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1311, 954)
+render_target_update_mode = 4
+
+[node name="ROV" type="RigidBody3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
 gravity_scale = 0.0
 linear_damp = 2.0
 angular_damp = 2.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ROV"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport/ROV"]
 shape = SubResource("BoxShape3D_7dm0k")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ROV"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport/ROV"]
 mesh = SubResource("BoxMesh_7dm0k")
 
-[node name="Camera3D" type="Camera3D" parent="ROV"]
+[node name="Camera3D" type="Camera3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport/ROV"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="ROV"]
+[node name="SpotLight3D" type="SpotLight3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport/ROV"]
 transform = Transform3D(0.96592575, 0.044943463, -0.25488696, -0.022557562, 0.99567896, 0.09008043, 0.25783417, -0.0812614, 0.96276575, 0.3, 0.1, -0.3)
 shadow_enabled = true
 shadow_bias = 0.2
@@ -83,7 +177,7 @@ spot_range = 7.0
 spot_attenuation = 1.5
 spot_angle_attenuation = 0.6597543
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="ROV"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport/ROV"]
 transform = Transform3D(0.96592575, -0.044943463, 0.25488696, 0.022557562, 0.99567896, 0.09008043, -0.25783417, -0.0812614, 0.96276575, -0.3, 0.1, -0.3)
 shadow_enabled = true
 shadow_bias = 0.2
@@ -91,7 +185,7 @@ spot_range = 7.0
 spot_attenuation = 1.5
 spot_angle_attenuation = 0.6597543
 
-[node name="MarineSnow" type="GPUParticles3D" parent="ROV"]
+[node name="MarineSnow" type="GPUParticles3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport/ROV"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10853052, 0)
 amount = 1000
 lifetime = 10.0
@@ -100,12 +194,12 @@ fixed_fps = 0
 process_material = SubResource("ParticleProcessMaterial_h2yge")
 draw_pass_1 = SubResource("QuadMesh_h2yge")
 
-[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="ROV/MarineSnow"]
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport/ROV/MarineSnow"]
 strength = 0.1
 attenuation = 3.732149
 radius = 10.0
 
-[node name="GPUParticlesAttractorSphere3D2" type="GPUParticlesAttractorSphere3D" parent="ROV/MarineSnow"]
+[node name="GPUParticlesAttractorSphere3D2" type="GPUParticlesAttractorSphere3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport/ROV/MarineSnow"]
 strength = -2.0
 attenuation = 0.75786155
 radius = 0.8
