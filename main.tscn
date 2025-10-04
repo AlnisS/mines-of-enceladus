@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr3rs27k1thwn"]
+[gd_scene load_steps=15 format=3 uid="uid://dr3rs27k1thwn"]
 
 [ext_resource type="Script" uid="uid://ds015jldkradl" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="AudioStream" uid="uid://c7xygtod3o8cy" path="res://assets/audio/ambiance.mp3" id="2_0xm2m"]
@@ -8,6 +8,30 @@ size = Vector3(0.6, 0.5, 0.7)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
 size = Vector3(0.6, 0.5, 0.7)
+
+[sub_resource type="Curve" id="Curve_0xm2m"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.50242716, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_h2yge"]
+curve = SubResource("Curve_0xm2m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h2yge"]
+emission_shape = 3
+emission_box_extents = Vector3(5, 5, 5)
+initial_velocity_min = 0.01
+initial_velocity_max = 0.01
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_h2yge")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+billboard_mode = 1
+billboard_keep_scale = true
+proximity_fade_distance = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_h2yge"]
+material = SubResource("StandardMaterial3D_0xm2m")
+size = Vector2(0.01, 0.01)
 
 [sub_resource type="Gradient" id="Gradient_7dm0k"]
 offsets = PackedFloat32Array(0.10209424, 0.2853403, 0.8376963, 1)
@@ -52,7 +76,7 @@ mesh = SubResource("BoxMesh_7dm0k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="ROV"]
-transform = Transform3D(0.9659258, 0.04494346, -0.25488698, 0, 0.98480785, 0.17364821, 0.25881907, -0.1677313, 0.9512513, 0.3, 0.1, -0.3)
+transform = Transform3D(0.96592575, 0.044943463, -0.25488696, -0.022557562, 0.99567896, 0.09008043, 0.25783417, -0.0812614, 0.96276575, 0.3, 0.1, -0.3)
 shadow_enabled = true
 shadow_bias = 0.2
 spot_range = 7.0
@@ -60,12 +84,31 @@ spot_attenuation = 1.5
 spot_angle_attenuation = 0.6597543
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="ROV"]
-transform = Transform3D(0.9659258, -0.04494346, 0.25488698, 0, 0.98480785, 0.17364821, -0.25881907, -0.1677313, 0.9512513, -0.3, 0.1, -0.3)
+transform = Transform3D(0.96592575, -0.044943463, 0.25488696, 0.022557562, 0.99567896, 0.09008043, -0.25783417, -0.0812614, 0.96276575, -0.3, 0.1, -0.3)
 shadow_enabled = true
 shadow_bias = 0.2
 spot_range = 7.0
 spot_attenuation = 1.5
 spot_angle_attenuation = 0.6597543
+
+[node name="MarineSnow" type="GPUParticles3D" parent="ROV"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10853052, 0)
+amount = 1000
+lifetime = 10.0
+preprocess = 10.0
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_h2yge")
+draw_pass_1 = SubResource("QuadMesh_h2yge")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="ROV/MarineSnow"]
+strength = 0.1
+attenuation = 3.732149
+radius = 10.0
+
+[node name="GPUParticlesAttractorSphere3D2" type="GPUParticlesAttractorSphere3D" parent="ROV/MarineSnow"]
+strength = -2.0
+attenuation = 0.75786155
+radius = 0.8
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 material_override = SubResource("StandardMaterial3D_h2yge")
