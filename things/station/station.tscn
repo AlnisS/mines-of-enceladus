@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=3 uid="uid://d3w68fj6vmwv7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_opqxm"]
+albedo_color = Color(0.12591085, 0.12591085, 0.12591082, 1)
+metallic_specular = 0.49
+roughness = 0.7
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_swswj"]
+noise_type = 3
+frequency = 0.0045
+domain_warp_enabled = true
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_awg5w"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_swswj")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i7m8h"]
+albedo_color = Color(0.25565878, 0.25565878, 0.25565878, 1)
+metallic = 1.0
+roughness = 0.68
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = SubResource("NoiseTexture2D_awg5w")
+uv1_scale = Vector3(1.8, 1.8, 1.8)
+uv1_offset = Vector3(0.65, 0, 0)
+uv1_triplanar = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_opqxm"]
+noise_type = 3
+fractal_type = 2
+domain_warp_enabled = true
+domain_warp_amplitude = 100.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_swswj"]
+noise = SubResource("FastNoiseLite_opqxm")
+seamless = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awg5w"]
+albedo_color = Color(0.40641972, 0.40641972, 0.40641972, 1)
+albedo_texture = SubResource("NoiseTexture2D_swswj")
+metallic = 1.0
+roughness = 0.61
+
+[node name="Station" type="Node3D"]
+
+[node name="Ropes" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_opqxm")
+use_collision = true
+
+[node name="Rope1" type="CSGBox3D" parent="Ropes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 25, 1)
+size = Vector3(0.05, 50, 0.05)
+
+[node name="Rope2" type="CSGBox3D" parent="Ropes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 25, -1)
+size = Vector3(0.05, 50, 0.05)
+
+[node name="Rope3" type="CSGBox3D" parent="Ropes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 25, 1)
+size = Vector3(0.05, 50, 0.05)
+
+[node name="Rope4" type="CSGBox3D" parent="Ropes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 25, -1)
+size = Vector3(0.05, 50, 0.05)
+
+[node name="Frame" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_i7m8h")
+use_collision = true
+
+[node name="Beam1" type="CSGBox3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.75, 1)
+size = Vector3(0.1, 1.5, 0.1)
+
+[node name="Beam2" type="CSGBox3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.75, -1)
+size = Vector3(0.1, 1.5, 0.1)
+
+[node name="Beam3" type="CSGBox3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.75, -1)
+size = Vector3(0.1, 1.5, 0.1)
+
+[node name="Beam4" type="CSGBox3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.75, 1)
+size = Vector3(0.1, 1.5, 0.1)
+
+[node name="DBeams" type="CSGCombiner3D" parent="Frame"]
+
+[node name="DBeam2" type="CSGBox3D" parent="Frame/DBeams"]
+transform = Transform3D(0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0, 0, 1, 0, 0.75, 1.0153809)
+size = Vector3(0.1, 2.2949219, 0.022949219)
+
+[node name="DBeam3" type="CSGBox3D" parent="Frame/DBeams"]
+transform = Transform3D(-0.49999997, -0.86602545, -8.742278e-08, -0.86602545, 0.49999997, 0, 4.3711385e-08, 7.5710346e-08, -1, 0, 0.75, 0.99184513)
+size = Vector3(0.1, 2.2949219, 0.022949219)
+
+[node name="DBeams2" type="CSGCombiner3D" parent="Frame"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="DBeam2" type="CSGBox3D" parent="Frame/DBeams2"]
+transform = Transform3D(0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0, 0, 1, 0, 0.75, 1.0153809)
+size = Vector3(0.1, 2.2949219, 0.022949219)
+
+[node name="DBeam3" type="CSGBox3D" parent="Frame/DBeams2"]
+transform = Transform3D(-0.49999997, -0.86602545, -8.742278e-08, -0.86602545, 0.49999997, 0, 4.3711385e-08, 7.5710346e-08, -1, 0, 0.75, 0.99184513)
+size = Vector3(0.1, 2.2949219, 0.022949219)
+
+[node name="DBeams3" type="CSGCombiner3D" parent="Frame"]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0, 0)
+
+[node name="DBeam2" type="CSGBox3D" parent="Frame/DBeams3"]
+transform = Transform3D(0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0, 0, 1, 0, 0.75, 1.0153809)
+size = Vector3(0.1, 2.2949219, 0.022949219)
+
+[node name="DBeam3" type="CSGBox3D" parent="Frame/DBeams3"]
+transform = Transform3D(-0.49999997, -0.86602545, -8.742278e-08, -0.86602545, 0.49999997, 0, 4.3711385e-08, 7.5710346e-08, -1, 0, 0.75, 0.99184513)
+size = Vector3(0.1, 2.2949219, 0.022949219)
+
+[node name="Plate1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0413965, 0)
+material_override = SubResource("StandardMaterial3D_awg5w")
+use_collision = true
+size = Vector3(2.0820313, 0.02, 2.0439453)
+
+[node name="Plate2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4506906, 0)
+material_override = SubResource("StandardMaterial3D_awg5w")
+use_collision = true
+size = Vector3(2.0820313, 0.02, 2.0439453)
