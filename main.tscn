@@ -89,6 +89,10 @@ background_mode = 1
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.0
+fog_enabled = true
+fog_light_color = Color(0.10766358, 0.16795126, 0.18567947, 1)
+fog_density = 0.2351
+fog_sky_affect = 0.8
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ig7tw")
@@ -168,6 +172,7 @@ mesh = SubResource("BoxMesh_7dm0k")
 
 [node name="Camera3D" type="Camera3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport/ROV"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+far = 20.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport/ROV"]
 transform = Transform3D(0.96592575, 0.044943463, -0.25488696, -0.022557562, 0.99567896, 0.09008043, 0.25783417, -0.0812614, 0.96276575, 0.3, 0.1, -0.3)
