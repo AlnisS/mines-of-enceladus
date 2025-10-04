@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dr3rs27k1thwn"]
+[gd_scene load_steps=10 format=3 uid="uid://dr3rs27k1thwn"]
 
 [ext_resource type="Script" uid="uid://ds015jldkradl" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="AudioStream" uid="uid://c7xygtod3o8cy" path="res://assets/audio/ambiance.mp3" id="2_0xm2m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(0.6, 0.5, 0.7)
@@ -118,3 +119,8 @@ size = Vector3(3, 3, 19)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7dm0k")
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0xm2m")
+volume_db = -5.0
+autoplay = true
