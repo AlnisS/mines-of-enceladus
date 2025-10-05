@@ -13,7 +13,7 @@ func _ready() -> void:
 	await get_tree().physics_frame
 	
 	seed(42)
-	for i in range(30):
+	for i in range(100):
 		
 		for j in range(10000):
 			var candidate = p0 + ps * Vector3(randf(), randf(), randf())

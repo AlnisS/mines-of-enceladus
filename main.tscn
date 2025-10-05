@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dr3rs27k1thwn"]
+[gd_scene load_steps=22 format=3 uid="uid://dr3rs27k1thwn"]
 
 [ext_resource type="Script" uid="uid://ds015jldkradl" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="AudioStream" uid="uid://c7xygtod3o8cy" path="res://assets/audio/ambiance.mp3" id="2_0xm2m"]
@@ -39,6 +39,9 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_size = 4
 shadow_offset = Vector2(0, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7mycd"]
+friction = 0.4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(0.6, 0.5, 0.7)
@@ -131,7 +134,7 @@ theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = -1
 theme_override_constants/shadow_outline_size = 1
 theme_override_font_sizes/font_size = 24
-text = "OMNI-VIZ TECHNOLOGY"
+text = "KEPLER HEAVY INDUSTRIES"
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -156,6 +159,7 @@ render_target_update_mode = 4
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6220856)
 collision_layer = 3
+physics_material_override = SubResource("PhysicsMaterial_7mycd")
 gravity_scale = 0.0
 linear_damp = 2.0
 angular_damp = 2.0
