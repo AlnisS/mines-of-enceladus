@@ -17,10 +17,14 @@ func _physics_process(delta: float) -> void:
 		Input.get_axis("rov_yaw_right", "rov_yaw_left"),
 		Input.get_axis("rov_roll_right", "rov_roll_left")
 	)
-	var pilot_force := pilot_force_input.normalized() * 2.0
-	var pilot_torque := pilot_torque_input.normalized() * 0.2
+	#var pilot_force := pilot_force_input.normalized() * 2.0
+	var pilot_force := pilot_force_input * 2.0
+	var pilot_torque := pilot_torque_input * 0.2
 	if Input.is_action_pressed("rov_translate_sprint"):
 		pilot_force *= 2.0
+	if resetting:
+		pilot_force = Vector3.ZERO
+		pilot_torque = Vector3.ZERO
 	var rov_basis := rov.global_basis
 	var pilot_force_global = rov_basis * pilot_force if rov_energy > 0 else Vector3.ZERO
 	var pilot_torque_global = rov_basis * pilot_torque if rov_energy > 0 else Vector3.ZERO
@@ -30,11 +34,22 @@ func _physics_process(delta: float) -> void:
 	rov.apply_central_force(pilot_force_global)
 	rov.apply_torque(pilot_torque_global + righting_torque)
 	
+	var thruster_scales = abs(pilot_force) / 4.0 * 1.5
+	var thruster_scales_2 = abs(pilot_torque) / 0.2  / 2.0
+	$Thruster1.pitch_scale = lerp($Thruster1.pitch_scale, thruster_scales.x, 0.2)
+	$Thruster2.pitch_scale = lerp($Thruster2.pitch_scale, thruster_scales.y, 0.2)
+	$Thruster3.pitch_scale = lerp($Thruster3.pitch_scale, thruster_scales.z, 0.2)
+	$Thruster4.pitch_scale = lerp($Thruster4.pitch_scale, thruster_scales_2.x, 0.2)
+	$Thruster5.pitch_scale = lerp($Thruster5.pitch_scale, thruster_scales_2.y, 0.2)
+	$Thruster6.pitch_scale = lerp($Thruster6.pitch_scale, thruster_scales_2.z, 0.2)
+	
+	
 	var energy_consumption = 0.0
 	energy_consumption += pilot_force.length()
 	energy_consumption += pilot_torque.length() * 0.2
 	energy_consumption += 0.4
 	energy_consumption *= 0.4 * 1.0
+	energy_consumption *= 0.6
 	rov_energy -= delta * energy_consumption
 	rov_energy = max(rov_energy, 0.0)
 	if rov_in_dock:
@@ -44,7 +59,12 @@ func _physics_process(delta: float) -> void:
 		rov_reset()
 	%EnergyBar.value = rov_energy
 
+var resetting = false
+
 func rov_reset():
+	if resetting:
+		return
+	resetting = true
 	var tween = get_tree().create_tween()
 	%LossScreen.show()
 	tween.tween_property(%LossScreen, "modulate", Color.BLACK, 1.0)
@@ -65,6 +85,7 @@ func rov_reset():
 	tween.tween_property(%Ambiance, "volume_db", -5.0, 1.0)
 	await tween.finished
 	%LossScreen.hide()
+	resetting = false
 	#await 
 
 

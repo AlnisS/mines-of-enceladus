@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://dr3rs27k1thwn"]
+[gd_scene load_steps=20 format=3 uid="uid://dr3rs27k1thwn"]
 
 [ext_resource type="Script" uid="uid://ds015jldkradl" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="AudioStream" uid="uid://c7xygtod3o8cy" path="res://assets/audio/ambiance.mp3" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://14dlbq6mme2p" path="res://things/site/site.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://d3w68fj6vmwv7" path="res://things/station/station.tscn" id="3_h2yge"]
+[ext_resource type="AudioStream" uid="uid://c71hhynwhuy2u" path="res://assets/audio/thruster3.mp3" id="5_lquwl"]
 
 [sub_resource type="Gradient" id="Gradient_0xm2m"]
 colors = PackedColorArray(0.054142177, 0.054142177, 0.05414214, 1, 0.12408299, 0.124082975, 0.124082945, 1)
@@ -256,6 +257,42 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
 
 [node name="Site" parent="." instance=ExtResource("2_1bvp3")]
+
+[node name="Thruster1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lquwl")
+volume_db = -10.0
+pitch_scale = 0.01
+autoplay = true
+
+[node name="Thruster2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lquwl")
+volume_db = -10.0
+pitch_scale = 0.01
+autoplay = true
+
+[node name="Thruster3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lquwl")
+volume_db = -10.0
+pitch_scale = 0.01
+autoplay = true
+
+[node name="Thruster4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lquwl")
+volume_db = -10.0
+pitch_scale = 0.01
+autoplay = true
+
+[node name="Thruster5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lquwl")
+volume_db = -10.0
+pitch_scale = 0.01
+autoplay = true
+
+[node name="Thruster6" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lquwl")
+volume_db = -10.0
+pitch_scale = 0.01
+autoplay = true
 
 [connection signal="dock_entered" from="Station" to="." method="_on_station_dock_entered"]
 [connection signal="dock_exited" from="Station" to="." method="_on_station_dock_exited"]
