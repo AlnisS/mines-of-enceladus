@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://dr3rs27k1thwn"]
+[gd_scene load_steps=27 format=3 uid="uid://dr3rs27k1thwn"]
 
 [ext_resource type="Script" uid="uid://ds015jldkradl" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="AudioStream" uid="uid://c7xygtod3o8cy" path="res://assets/audio/ambiance.mp3" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://14dlbq6mme2p" path="res://things/site/site.tscn" id="2_1bvp3"]
+[ext_resource type="FontFile" uid="uid://2u3ath4ih43f" path="res://assets/fonts/handlee/Handlee-Regular.ttf" id="2_5vw27"]
 [ext_resource type="Theme" uid="uid://dtma84g5avv6c" path="res://assets/themes/rov_ui_theme.tres" id="2_272bh"]
 [ext_resource type="PackedScene" uid="uid://d3w68fj6vmwv7" path="res://things/station/station.tscn" id="3_h2yge"]
 [ext_resource type="AudioStream" uid="uid://c71hhynwhuy2u" path="res://assets/audio/thruster3.mp3" id="5_lquwl"]
@@ -40,6 +41,11 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_size = 4
 shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kek77"]
+bg_color = Color(0.6476309, 0.5991749, 0.44474387, 1)
+shadow_size = 10
+shadow_offset = Vector2(0, 2)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7mycd"]
 friction = 0.4
@@ -314,6 +320,36 @@ ratio = 1.333
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0xm2m")
 
+[node name="Sticky" type="Panel" parent="AspectRatioContainer/Panel"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -259.66467
+offset_top = -14.0
+offset_right = 10.335327
+offset_bottom = 256.0
+grow_horizontal = 0
+rotation = -0.07679449
+pivot_offset = Vector2(135, 135)
+theme_override_styles/panel = SubResource("StyleBoxFlat_kek77")
+
+[node name="Label" type="Label" parent="AspectRatioContainer/Panel/Sticky"]
+layout_mode = 0
+offset_left = 7.362671
+offset_top = 8.590164
+offset_right = 265.36267
+offset_bottom = 230.59016
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_5vw27")
+theme_override_font_sizes/font_size = 24
+text = "Move — IJKLUO
+Rotate — WASDQE
+
+Username — rover
+Password — hunter2"
+
 [node name="Label" type="Label" parent="AspectRatioContainer/Panel"]
 layout_mode = 1
 anchors_preset = 12
@@ -333,6 +369,36 @@ theme_override_font_sizes/font_size = 24
 text = "KEPLER HEAVY INDUSTRIES"
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="Sticky2" type="Panel" parent="AspectRatioContainer/Panel"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -235.66455
+offset_top = 201.99997
+offset_right = 34.33545
+offset_bottom = 471.99997
+grow_horizontal = 0
+rotation = 0.05235988
+pivot_offset = Vector2(135, 135)
+theme_override_styles/panel = SubResource("StyleBoxFlat_kek77")
+
+[node name="Label" type="Label" parent="AspectRatioContainer/Panel/Sticky2"]
+layout_mode = 0
+offset_left = 7.362671
+offset_top = 8.590164
+offset_right = 265.36267
+offset_bottom = 230.59016
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_5vw27")
+theme_override_font_sizes/font_size = 24
+text = "Report all anomalies to Stanley at Enceladus ocean research station 14!
+
+Beta team is investigating sudden failures of mining vehicles below 9 km...
+"
+autowrap_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
 layout_mode = 2

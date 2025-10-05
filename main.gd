@@ -71,7 +71,7 @@ func _physics_process(delta: float) -> void:
 	%PitchValue.text = "%.0f°" % (rot.x + 0.001)
 	%RollValue.text = "%.0f°" % (-rot.z + 0.001)
 	
-	%DepthValue.text = "%.0fm" % -(rov.global_position.z - 8734.0)
+	%DepthValue.text = "%.0fm" % -(rov.global_position.y - 8734.0 - 250.0)
 
 var resetting = false
 
