@@ -55,6 +55,10 @@ func _physics_process(delta: float) -> void:
 	if rov_in_dock:
 		rov_energy += delta * 10.0
 		rov_energy = min(rov_energy, 100.0)
+		if rov_energy == 100.0:
+			if $Charging.volume_db == -5.0:
+				$Charging.volume_db -= 0.01
+				create_tween().tween_property($Charging, "volume_db", -25.0, 0.3)
 	if rov_energy == 0.0 or Input.is_action_just_pressed("ui_up"):
 		rov_reset()
 	%EnergyBar.value = rov_energy
@@ -93,6 +97,9 @@ func _on_station_dock_entered(body: Node3D) -> void:
 	if body == rov:
 		print("rov entered dock")
 		rov_in_dock = true
+		$Charging.volume_db = -5.0
+		if rov_energy < 99.0:
+			$Charging.play()
 		var provs = get_tree().get_nodes_in_group("provisional_collected")
 		for crystal in provs:
 			if not crystal.is_in_group("really_collected"):
