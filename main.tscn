@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dr3rs27k1thwn"]
+[gd_scene load_steps=22 format=3 uid="uid://dr3rs27k1thwn"]
 
 [ext_resource type="Script" uid="uid://ds015jldkradl" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="AudioStream" uid="uid://c7xygtod3o8cy" path="res://assets/audio/ambiance.mp3" id="2_0xm2m"]
@@ -93,6 +93,9 @@ ambient_light_energy = 0.0
 fog_light_color = Color(0.10766358, 0.16795126, 0.18567947, 1)
 fog_density = 0.2351
 fog_sky_affect = 0.8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ig7tw")
@@ -231,14 +234,14 @@ transform = Transform3D(0.26807705, -0.16550493, -0.9490748, -0.9223227, 0.24049
 size = Vector3(5, 5.123535, 10)
 
 [node name="VerticalTunnel1" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(-0.117995046, -0.9901989, 0.074720606, -0.7672291, 0.0431367, -0.6399209, 0.6304258, -0.13283539, -0.76479954, 0.2238995, -0.966414, -4.6434736)
+transform = Transform3D(-0.117995046, -0.9901989, 0.074720606, -0.7672291, 0.0431367, -0.6399209, 0.6304258, -0.13283539, -0.76479954, 0.29033694, -1.5353963, -5.323491)
 operation = 2
-size = Vector3(3.6622314, 1.8026123, 11.497559)
+size = Vector3(3.6622314, 1.8026123, 13.275848)
 
 [node name="Tunnel1" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.942859, 0)
+transform = Transform3D(0.99877095, 0, -0.049564485, 0, 1, 0, 0.049564485, 0, 0.99877095, 0, -5.942859, -1.3952637)
 operation = 2
-size = Vector3(3, 3, 19)
+size = Vector3(3, 3, 21.790527)
 
 [node name="Tunnel2" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -5.942859, 0)
@@ -264,9 +267,53 @@ size = Vector3(3, 3, 19)
 environment = SubResource("Environment_7dm0k")
 
 [node name="Ambiance" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("2_0xm2m")
 volume_db = -5.0
 autoplay = true
 
 [node name="Station" parent="." instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50487494, 0.08992851)
+
+[node name="EnergyBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -389.0
+offset_top = -466.0
+offset_right = -31.0
+offset_bottom = -439.0
+grow_horizontal = 0
+grow_vertical = 2
+value = 100.0
+
+[node name="EnergyLabel" type="Label" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -476.0
+offset_top = -463.0
+offset_right = -423.0
+offset_bottom = -440.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Energy"
+
+[node name="LossScreen" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0, 0, 0, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
+[connection signal="dock_entered" from="Station" to="." method="_on_station_dock_entered"]
+[connection signal="dock_exited" from="Station" to="." method="_on_station_dock_exited"]

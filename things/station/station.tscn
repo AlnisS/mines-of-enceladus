@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3w68fj6vmwv7"]
+[gd_scene load_steps=10 format=3 uid="uid://d3w68fj6vmwv7"]
+
+[ext_resource type="Script" uid="uid://d30lrw7c42gw" path="res://things/station/station.gd" id="1_swswj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_opqxm"]
 albedo_color = Color(0.12591085, 0.12591085, 0.12591082, 1)
@@ -45,7 +47,11 @@ albedo_texture = SubResource("NoiseTexture2D_swswj")
 metallic = 1.0
 roughness = 0.61
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_opqxm"]
+size = Vector3(1.71, 1.06, 1.307)
+
 [node name="Station" type="Node3D"]
+script = ExtResource("1_swswj")
 
 [node name="Ropes" type="CSGCombiner3D" parent="."]
 material_override = SubResource("StandardMaterial3D_opqxm")
@@ -130,3 +136,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4506906, 0)
 material_override = SubResource("StandardMaterial3D_awg5w")
 use_collision = true
 size = Vector3(2.0820313, 0.02, 2.0439453)
+
+[node name="DockArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DockArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8234208, 0.15277588)
+shape = SubResource("BoxShape3D_opqxm")
+
+[connection signal="body_entered" from="DockArea" to="." method="_on_dock_area_body_entered"]
+[connection signal="body_exited" from="DockArea" to="." method="_on_dock_area_body_exited"]
