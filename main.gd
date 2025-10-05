@@ -62,6 +62,16 @@ func _physics_process(delta: float) -> void:
 	if rov_energy == 0.0 or Input.is_action_just_pressed("ui_up"):
 		rov_reset()
 	%EnergyBar.value = rov_energy
+	
+	var crystal_count = get_tree().get_nodes_in_group("provisional_collected").size()
+	%CrystalsValue.text = str(crystal_count)
+	
+	var rot = rov.global_rotation_degrees
+	%YawValue.text = "%.0f°" % (-rot.y + 0.001)
+	%PitchValue.text = "%.0f°" % (rot.x + 0.001)
+	%RollValue.text = "%.0f°" % (-rot.z + 0.001)
+	
+	%DepthValue.text = "%.0fm" % -(rov.global_position.z - 8734.0)
 
 var resetting = false
 
