@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://jpflharyltmh"]
+
+[ext_resource type="Script" uid="uid://dj3xvjc5jvcp1" path="res://things/tunnel/tunnel.gd" id="1_a5b7n"]
+
+[node name="Tunnel" type="CSGCombiner3D"]
+operation = 2
+script = ExtResource("1_a5b7n")
+
+[node name="SurfaceHemi" type="CSGPolygon3D" parent="."]
+visible = false
+polygon = PackedVector2Array(-1.7, 2, -2, 1.7, -2, 0.3, -1.7, 0, 1.7, 0, 2, 0.3, 2, 1.7, 1.7, 2)
+depth = 10.0
+
+[node name="SurfaceHemiSmall" type="CSGPolygon3D" parent="."]
+visible = false
+polygon = PackedVector2Array(-1, 1.2, -1.2, 1, -1.2, 0.2, -1, 0, 1, 0, 1.2, 0.2, 1.2, 1, 1, 1.2)
+depth = 10.0
+
+[node name="SurfaceHemiTiny" type="CSGPolygon3D" parent="."]
+visible = false
+polygon = PackedVector2Array(-0.4, 1, -0.6, 0.8, -0.6, 0.2, -0.4, 0, 0.4, 0, 0.6, 0.2, 0.6, 0.8, 0.4, 1)
+depth = 10.0
+
+[node name="SurfaceBox" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5)
+size = Vector3(3, 3, 10)

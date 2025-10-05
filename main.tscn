@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://dr3rs27k1thwn"]
+[gd_scene load_steps=19 format=3 uid="uid://dr3rs27k1thwn"]
 
 [ext_resource type="Script" uid="uid://ds015jldkradl" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="AudioStream" uid="uid://c7xygtod3o8cy" path="res://assets/audio/ambiance.mp3" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://14dlbq6mme2p" path="res://things/site/site.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://d3w68fj6vmwv7" path="res://things/station/station.tscn" id="3_h2yge"]
 
 [sub_resource type="Gradient" id="Gradient_0xm2m"]
@@ -66,28 +67,6 @@ proximity_fade_distance = 0.5
 [sub_resource type="QuadMesh" id="QuadMesh_h2yge"]
 material = SubResource("StandardMaterial3D_0xm2m")
 size = Vector2(0.01, 0.01)
-
-[sub_resource type="Gradient" id="Gradient_7dm0k"]
-offsets = PackedFloat32Array(0.10209424, 0.2853403, 0.8375706, 0.99293786)
-colors = PackedColorArray(0, 0, 0, 1, 0.15127608, 0.15127608, 0.15127608, 1, 0.71, 0.60776, 0.53959996, 1, 0.5047527, 0.5024661, 0.37283012, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ig7tw"]
-noise_type = 3
-fractal_type = 2
-domain_warp_enabled = true
-domain_warp_type = 2
-domain_warp_amplitude = 50.0
-domain_warp_frequency = 0.001
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0xm2m"]
-noise = SubResource("FastNoiseLite_ig7tw")
-color_ramp = SubResource("Gradient_7dm0k")
-seamless = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
-albedo_texture = SubResource("NoiseTexture2D_0xm2m")
-uv1_scale = Vector3(0.3, 0.3, 0.3)
-uv1_triplanar = true
 
 [sub_resource type="Environment" id="Environment_7dm0k"]
 background_mode = 1
@@ -217,69 +196,6 @@ strength = -2.0
 attenuation = 0.75786155
 radius = 0.8
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
-material_override = SubResource("StandardMaterial3D_h2yge")
-use_collision = true
-
-[node name="Ground" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.4451904, 0)
-size = Vector3(49.838867, 9.890381, 67.37109)
-
-[node name="Rock1" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(0.96493864, 0.25441852, -0.06453372, -0.2624755, 0.93531877, -0.23724532, 0, 0.2458657, 0.9693039, -2.7181761, -1.5324919, -3.855924)
-size = Vector3(5.5664063, 3.3100586, 10)
-
-[node name="Rock2" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(0.26807705, -0.16550495, -0.9490748, -0.2624755, 0.93531877, -0.2372453, 0.92695266, 0.31270888, 0.20729652, 1.3742592, -2.5555258, -2.850103)
-size = Vector3(9.206543, 4.158203, 10)
-
-[node name="Rock3" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(0.26807705, -0.16550493, -0.9490748, -0.9223227, 0.24049678, -0.3024598, 0.27830803, 0.95643574, -0.08817728, -0.25341797, -2.7194328, -12.957159)
-size = Vector3(5, 15.067627, 13.314941)
-
-[node name="Rock4" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(-0.37582538, -0.8292898, -0.413562, -0.9041523, 0.23031794, 0.35980853, -0.20313472, 0.50914824, -0.8363638, 9.751269, -3.1773727, -8.143629)
-size = Vector3(5, 15.877563, 13.314941)
-
-[node name="Rock5" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(-0.1541226, 0.6166698, -0.77198756, -0.9036014, 0.22809151, 0.36259997, 0.39968815, 0.75345373, 0.52206963, -2.9088078, -4.558675, -19.131187)
-size = Vector3(5, 15.877563, 13.314941)
-
-[node name="VerticalTunnel1" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(-0.117995046, -0.9901989, 0.074720606, -0.7672291, 0.0431367, -0.6399209, 0.6304258, -0.13283539, -0.76479954, 0.29033694, -1.5353963, -5.323491)
-operation = 2
-size = Vector3(3.6622314, 1.8026123, 13.275848)
-
-[node name="Tunnel1" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(0.99877095, 0, -0.049564485, 0, 1, 0, 0.049564485, 0, 0.99877095, 0, -5.942859, -1.3952637)
-operation = 2
-size = Vector3(3, 3, 21.790527)
-
-[node name="Tunnel2" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -5.942859, 0)
-operation = 2
-size = Vector3(3, 3, 19)
-
-[node name="Tunnel3" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -5.942859, 0)
-operation = 2
-size = Vector3(3, 3, 19)
-
-[node name="Tunnel4" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, 2.5028517, -5.942859, 5.473281)
-operation = 2
-size = Vector3(3, 3, 19)
-
-[node name="Tunnel5" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, -2.876167, -5.942859, -2.0501785)
-operation = 2
-size = Vector3(3, 3, 19)
-
-[node name="Tunnel6" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(-0.027764603, 0, 0.9996145, 0, 1, 0, -0.9996145, 0, -0.027764603, -2.876167, -5.942859, -10.612553)
-operation = 2
-size = Vector3(3, 3, 19)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7dm0k")
 
@@ -331,6 +247,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
+[node name="Site" parent="." instance=ExtResource("2_1bvp3")]
 
 [connection signal="dock_entered" from="Station" to="." method="_on_station_dock_entered"]
 [connection signal="dock_exited" from="Station" to="." method="_on_station_dock_exited"]
