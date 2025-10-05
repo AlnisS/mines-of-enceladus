@@ -1,9 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bj5ie04fkrbov"]
+[gd_scene load_steps=8 format=3 uid="uid://bj5ie04fkrbov"]
 
 [ext_resource type="Script" uid="uid://bqjucp3274k68" path="res://things/crystal/crystal.gd" id="1_gtkmu"]
+[ext_resource type="AudioStream" uid="uid://b3xqbcewp8kgh" path="res://assets/audio/bells.mp3" id="2_6ow2t"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_71pmm"]
-radius = 0.38001952
+radius = 0.55905885
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_71pmm"]
 albedo_color = Color(0.7866667, 0.6, 1, 1)
@@ -11,6 +12,24 @@ metallic_specular = 1.0
 roughness = 0.08
 emission_enabled = true
 emission = Color(0.9290335, 0.282, 0.94, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtkmu"]
+emission_enabled = true
+emission = Color(0.59762657, 0.2336, 0.73, 1)
+emission_energy_multiplier = 4.0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_6ow2t"]
+material = SubResource("StandardMaterial3D_gtkmu")
+size = Vector2(0.03, 0.03)
+
+[sub_resource type="Curve" id="Curve_gtkmu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Crystal" type="Node3D"]
 script = ExtResource("1_gtkmu")
@@ -47,5 +66,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16690484)
 visible = false
 light_color = Color(0.709775, 0.46705508, 1, 1)
 omni_range = 0.5
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.11873995)
+emitting = false
+amount = 50
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("QuadMesh_6ow2t")
+emission_shape = 3
+emission_box_extents = Vector3(0.08, 0.08, 0.15)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.3
+initial_velocity_max = 1.0
+scale_amount_curve = SubResource("Curve_gtkmu")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_6ow2t")
+volume_db = -5.0
+max_db = 0.0
 
 [connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]

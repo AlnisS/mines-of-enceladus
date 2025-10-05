@@ -26,6 +26,7 @@ func _physics_process(delta: float) -> void:
 	var pilot_torque_global = rov_basis * pilot_torque if rov_energy > 0 else Vector3.ZERO
 	
 	var righting_torque = rov_basis.y.cross(Vector3.UP) * 0.3
+	righting_torque = Vector3.ZERO # TODO: option to enable righting torque?
 	rov.apply_central_force(pilot_force_global)
 	rov.apply_torque(pilot_torque_global + righting_torque)
 	
