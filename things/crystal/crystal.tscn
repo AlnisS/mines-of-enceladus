@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj5ie04fkrbov"]
+
+[ext_resource type="Script" uid="uid://bqjucp3274k68" path="res://things/crystal/crystal.gd" id="1_gtkmu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_71pmm"]
+radius = 0.38001952
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_71pmm"]
+albedo_color = Color(0.7866667, 0.6, 1, 1)
+metallic_specular = 1.0
+roughness = 0.08
+emission_enabled = true
+emission = Color(0.9290335, 0.282, 0.94, 1)
+
+[node name="Crystal" type="Node3D"]
+script = ExtResource("1_gtkmu")
+
+[node name="Detector" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025172986, -0.029217944, -0.2674693)
+shape = SubResource("SphereShape3D_71pmm")
+
+[node name="Visual" type="CSGCombiner3D" parent="."]
+transform = Transform3D(0.32, 0, 0, 0, -1.3987644e-08, 0.32, 0, -0.32, -1.3987644e-08, -0.08020758, -0.02018565, 0)
+material_override = SubResource("StandardMaterial3D_71pmm")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Visual"]
+transform = Transform3D(0.7196549, -0.10516895, -0.68632084, 0, 0.9884622, -0.15146784, 0.6943319, 0.10900458, 0.7113517, 0.09615737, 0, -0.20103307)
+polygon = PackedVector2Array(0, 0, 0.5820276, 1.0840604, 0.6812874, 0.7026554, 0.49013203, -0.08915305)
+depth = 0.1
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Visual"]
+transform = Transform3D(-0.28408036, -0.18278465, -0.9412163, -0.052815307, 0.983153, -0.17498791, 0.9573447, 0, -0.28894827, 0.40890235, 0.096696496, -0.6078253)
+polygon = PackedVector2Array(0.45520177, -0.15231872, 0.113859, 0.95084107, 0.5503284, 0.57717997, 1.0638509, 0.9282143, 0.70734316, -0.21312332)
+depth = 0.1
+
+[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="Visual"]
+transform = Transform3D(-0.9560608, 0.00081985246, 0.29316717, -0.0528153, 0.983153, -0.1749879, -0.28837168, -0.18278278, -0.9399107, 0.814721, 0.096696496, 0.070188224)
+polygon = PackedVector2Array(0.45520177, -0.15231872, 0.18582529, 0.75981814, 0.536361, 0.3420344, 0.9170632, 0.5954845, 0.70734316, -0.21312332)
+depth = 0.1
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16690484)
+visible = false
+light_color = Color(0.709775, 0.46705508, 1, 1)
+omni_range = 0.5
+
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]

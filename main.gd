@@ -52,6 +52,10 @@ func rov_reset():
 	
 	rov_energy = 100.0
 	rov.global_transform = rov_reset_transform
+	for crystal in get_tree().get_nodes_in_group("provisional_collected"):
+		if not crystal.is_in_group("really_collected"):
+			crystal.uncollect()
+	
 	%Ambiance.play(0)
 	
 	tween = get_tree().create_tween()
@@ -67,6 +71,12 @@ func _on_station_dock_entered(body: Node3D) -> void:
 	if body == rov:
 		print("rov entered dock")
 		rov_in_dock = true
+		var provs = get_tree().get_nodes_in_group("provisional_collected")
+		for crystal in provs:
+			if not crystal.is_in_group("really_collected"):
+				crystal.add_to_group("really_collected")
+			# TODO: count score
+			
 
 
 func _on_station_dock_exited(body: Node3D) -> void:

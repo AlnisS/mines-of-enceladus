@@ -73,9 +73,14 @@ background_mode = 1
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.0
-fog_light_color = Color(0.10766358, 0.16795126, 0.18567947, 1)
-fog_density = 0.2351
+glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 1.0
 fog_sky_affect = 0.8
+fog_depth_begin = 5.0
+fog_depth_end = 15.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0, 0, 0, 1)
@@ -147,6 +152,7 @@ render_target_update_mode = 4
 [node name="ROV" type="RigidBody3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6220856)
+collision_layer = 3
 gravity_scale = 0.0
 linear_damp = 2.0
 angular_damp = 2.0

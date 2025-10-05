@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://14dlbq6mme2p"]
+[gd_scene load_steps=7 format=3 uid="uid://14dlbq6mme2p"]
 
 [ext_resource type="PackedScene" uid="uid://jpflharyltmh" path="res://things/tunnel/tunnel.tscn" id="1_0aet1"]
+[ext_resource type="Script" uid="uid://3lcsf368bvif" path="res://things/site/site.gd" id="1_y2kku"]
 
 [sub_resource type="Gradient" id="Gradient_0aet1"]
 offsets = PackedFloat32Array(0.10209424, 0.2853403, 0.8375706, 0.99293786)
@@ -25,13 +26,13 @@ uv1_scale = Vector3(0.3, 0.3, 0.3)
 uv1_triplanar = true
 
 [node name="Site" type="Node3D"]
+script = ExtResource("1_y2kku")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 material_override = SubResource("StandardMaterial3D_38c6h")
 use_collision = true
 
 [node name="ROCKS" type="CSGCombiner3D" parent="CSGCombiner3D"]
-visible = false
 
 [node name="Ground" type="CSGBox3D" parent="CSGCombiner3D/ROCKS"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.475098, -10.26947, -9.782227)
@@ -58,8 +59,8 @@ transform = Transform3D(-0.1541226, 0.6166698, -0.77198756, -0.9036014, 0.228091
 size = Vector3(5, 15.877563, 13.314941)
 
 [node name="Tunnel6" parent="CSGCombiner3D" instance=ExtResource("1_0aet1")]
-transform = Transform3D(-0.11799502, -0.99019885, 0.07472056, 0.76722914, -0.043136783, 0.6399207, -0.6304258, 0.13283527, 0.76479965, 0.39363468, 2.6774533, -0.23167849)
-type = 1
+transform = Transform3D(-0.11799502, -0.99019885, 0.07472056, 0.76722914, -0.043136783, 0.6399207, -0.6304258, 0.13283527, 0.76479965, 0.39363468, 2.6774533, -0.8251538)
+type = 0
 length = 20.0
 
 [node name="VerticalTunnel1" type="CSGBox3D" parent="CSGCombiner3D"]
@@ -241,3 +242,19 @@ polygon = PackedVector2Array(-2.7242808, -0.4999194, -3.9305086, 3.1153784, -2.7
 transform = Transform3D(1, 0, 0, 0, -0.99499995, -0.09987557, 0, 0.09987557, -0.99499995, 9.236034, -12.612472, -28.062735)
 operation = 2
 polygon = PackedVector2Array(-2.7242808, -0.4999194, -3.9305086, 3.1153784, -2.7333179, 5.623234, 1.0782433, 5.230998, 6.8881645, 3.9517193, 3.0578976, 0.25634956, 3.2779446, -1.3158951, 1.0023575, -2.2609272)
+
+[node name="CrystalBounds3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0319185, -1.8425055, -10.221452)
+visible = false
+size = Vector3(15.788086, 14.015869, 12.302124)
+
+[node name="CrystalBounds" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0319185, -12.648309, -25.476929)
+visible = false
+size = Vector3(54.581787, 14.015869, 51.953857)
+
+[node name="CrystalRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0319185, -12.648309, -25.476929)
+target_position = Vector3(0, -5, 0)
+
+[node name="Crystals" type="Node3D" parent="."]
