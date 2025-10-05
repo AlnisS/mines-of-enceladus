@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://14dlbq6mme2p"]
+[gd_scene load_steps=8 format=3 uid="uid://14dlbq6mme2p"]
 
 [ext_resource type="PackedScene" uid="uid://jpflharyltmh" path="res://things/tunnel/tunnel.tscn" id="1_0aet1"]
 [ext_resource type="Script" uid="uid://3lcsf368bvif" path="res://things/site/site.gd" id="1_y2kku"]
+[ext_resource type="PackedScene" uid="uid://u1bx1yxd7q46" path="res://things/creature/creature.tscn" id="3_38c6h"]
 
 [sub_resource type="Gradient" id="Gradient_0aet1"]
 offsets = PackedFloat32Array(0.10209424, 0.2853403, 0.8375706, 0.99293786)
@@ -186,19 +187,19 @@ type = 0
 length = 20.0
 
 [node name="Tunnel22" parent="CSGCombiner3D" instance=ExtResource("1_0aet1")]
-transform = Transform3D(-0.47544003, 0, 0.8797481, 0, 1, 0, -0.8797481, 0, -0.47544003, 8.81744, -18.04035, -28.782038)
+transform = Transform3D(-0.5076287, 0, 0.861576, 0, 1, 0, -0.861576, 0, -0.5076287, 15.710691, -18.040352, -31.871885)
 type = 1
-length = 30.0
+length = 50.0
 
 [node name="Tunnel23" parent="CSGCombiner3D" instance=ExtResource("1_0aet1")]
-transform = Transform3D(-0.5405782, 0, 0.84129375, 0, 1, 0, -0.84129375, 0, -0.5405782, 3.817438, -18.04035, -37.44229)
+transform = Transform3D(-0.5405782, 0, 0.84129375, 0, 1, 0, -0.84129375, 0, -0.5405782, 10.71069, -18.040352, -40.53214)
 type = 1
-length = 30.0
+length = 50.0
 
 [node name="Tunnel24" parent="CSGCombiner3D" instance=ExtResource("1_0aet1")]
-transform = Transform3D(-0.5271932, 0, 0.8497455, 0, 1, 0, -0.8497455, 0, -0.5271932, 13.121296, -18.04035, -21.327538)
+transform = Transform3D(-0.5271932, 0, 0.8497455, 0, 1, 0, -0.8497455, 0, -0.5271932, 20.01455, -18.040352, -24.417385)
 type = 1
-length = 30.0
+length = 50.0
 
 [node name="Tunnel25" parent="CSGCombiner3D" instance=ExtResource("1_0aet1")]
 transform = Transform3D(0.8281383, 0, 0.5605233, 0, 1, 0, -0.5605233, 0, 0.8281383, 12.085388, -18.04035, -19.121782)
@@ -258,3 +259,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0319185, -12.648309, -25.4
 target_position = Vector3(0, -5, 0)
 
 [node name="Crystals" type="Node3D" parent="."]
+
+[node name="Creature" parent="." instance=ExtResource("3_38c6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.46376, 0, 9.362338)
+
+[node name="Creature2" parent="." instance=ExtResource("3_38c6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.050978, -17.44326, -9.692483)
+
+[node name="Creature5" parent="." instance=ExtResource("3_38c6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.042982, -17.44326, -29.810135)
+
+[node name="Creature6" parent="." instance=ExtResource("3_38c6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.853773, -17.44326, -22.257393)
+
+[node name="Creature7" parent="." instance=ExtResource("3_38c6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.729515, -17.44326, -38.184235)
+
+[node name="Creature4" parent="." instance=ExtResource("3_38c6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.33963, -17.44326, -16.54307)
+
+[node name="Creature3" parent="." instance=ExtResource("3_38c6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.348602, -17.44326, -1.791728)

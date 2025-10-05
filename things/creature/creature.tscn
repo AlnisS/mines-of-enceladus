@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://u1bx1yxd7q46"]
+
+[ext_resource type="Script" uid="uid://cblhxc3qhbmmd" path="res://things/creature/creature.gd" id="1_jovwk"]
+[ext_resource type="AudioStream" uid="uid://cujgjcisqstte" path="res://assets/audio/creature.mp3" id="2_vohlt"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vohlt"]
+radius = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wqire"]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+roughness = 0.28
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_jovwk"]
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[sub_resource type="SphereMesh" id="SphereMesh_vohlt"]
+radius = 5.0
+height = 10.0
+radial_segments = 16
+rings = 8
+
+[node name="Creature" type="Node3D" groups=["creature"]]
+script = ExtResource("1_jovwk")
+
+[node name="Detector" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detector"]
+shape = SubResource("SphereShape3D_vohlt")
+
+[node name="Sphere1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
+material_override = SubResource("StandardMaterial3D_wqire")
+mesh = SubResource("SphereMesh_jovwk")
+
+[node name="Sphere2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
+material_override = SubResource("StandardMaterial3D_wqire")
+mesh = SubResource("SphereMesh_jovwk")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
+light_color = Color(1, 0, 0, 1)
+light_energy = 50.0
+light_specular = 0.0
+omni_range = 0.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_vohlt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_vohlt")
+
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]

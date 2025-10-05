@@ -293,7 +293,7 @@ fog_depth_end = 15.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" groups=["main"]]
 script = ExtResource("1_ig7tw")
 
 [node name="Panel" type="Panel" parent="."]
@@ -419,10 +419,10 @@ size_2d_override = Vector2i(640, 480)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="ROV" type="RigidBody3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport"]
+[node name="ROV" type="RigidBody3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport" groups=["rov"]]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6220856)
-collision_layer = 3
+collision_layer = 7
 physics_material_override = SubResource("PhysicsMaterial_7mycd")
 gravity_scale = 0.0
 linear_damp = 2.0

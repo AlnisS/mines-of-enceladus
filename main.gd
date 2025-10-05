@@ -92,6 +92,7 @@ func rov_reset():
 			crystal.uncollect()
 	
 	%Ambiance.play(0)
+	get_tree().call_group("creature", "reset")
 	
 	tween = get_tree().create_tween()
 	%LossScreen.show()
