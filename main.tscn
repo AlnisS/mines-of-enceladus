@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://dr3rs27k1thwn"]
+[gd_scene load_steps=25 format=3 uid="uid://dr3rs27k1thwn"]
 
 [ext_resource type="Script" uid="uid://ds015jldkradl" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="AudioStream" uid="uid://c7xygtod3o8cy" path="res://assets/audio/ambiance.mp3" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://14dlbq6mme2p" path="res://things/site/site.tscn" id="2_1bvp3"]
+[ext_resource type="Theme" uid="uid://dtma84g5avv6c" path="res://assets/themes/rov_ui_theme.tres" id="2_272bh"]
 [ext_resource type="PackedScene" uid="uid://d3w68fj6vmwv7" path="res://things/station/station.tscn" id="3_h2yge"]
 [ext_resource type="AudioStream" uid="uid://c71hhynwhuy2u" path="res://assets/audio/thruster3.mp3" id="5_lquwl"]
 [ext_resource type="AudioStream" uid="uid://b8xbssui4067b" path="res://assets/audio/charging.mp3" id="6_7mycd"]
@@ -348,6 +349,8 @@ stretch = true
 handle_input_locally = false
 audio_listener_enable_3d = true
 size = Vector2i(1310, 953)
+size_2d_override = Vector2i(640, 480)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="ROV" type="RigidBody3D" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport"]
@@ -404,20 +407,13 @@ strength = -2.0
 attenuation = 0.75786155
 radius = 0.8
 
-[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport"]
-material = SubResource("ShaderMaterial_272bh")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="EnergyBar" type="ProgressBar" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
-offset_left = 65.32898
+offset_left = 88.66449
 offset_top = 6.0
-offset_right = 253.65796
+offset_right = 276.99347
 offset_bottom = 33.0
+theme = ExtResource("2_272bh")
 value = 100.0
 
 [node name="EnergyLabel" type="Label" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport"]
@@ -425,7 +421,16 @@ offset_left = 6.0
 offset_top = 6.0
 offset_right = 59.0
 offset_bottom = 29.0
+theme = ExtResource("2_272bh")
 text = "Energy"
+
+[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer/MarginContainer/SubViewportContainer/SubViewport"]
+material = SubResource("ShaderMaterial_272bh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7dm0k")
