@@ -26,7 +26,7 @@ func _ready() -> void:
 				var n = ray.get_collision_normal()
 				n += (Vector3(randf(), randf(), randf()) * 0.5 - Vector3.ONE) * 0.1
 				print(p)
-				var c = CRYSTAL.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
+				var c = CRYSTAL.instantiate()
 				$Crystals.add_child(c)
 				c.global_position = p
 				c.look_at(p + n)
