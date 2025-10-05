@@ -346,6 +346,7 @@ theme_override_fonts/font = ExtResource("2_5vw27")
 theme_override_font_sizes/font_size = 24
 text = "Move — IJKLUO
 Rotate — WASDQE
+Boost — Shift
 
 Username — rover
 Password — hunter2"
@@ -377,9 +378,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -235.66455
-offset_top = 201.99997
+offset_top = 225.99998
 offset_right = 34.33545
-offset_bottom = 471.99997
+offset_bottom = 496.0
 grow_horizontal = 0
 rotation = 0.05235988
 pivot_offset = Vector2(135, 135)
